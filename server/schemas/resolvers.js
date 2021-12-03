@@ -29,8 +29,7 @@ const resolvers = {
     // },
   },
   Mutation: {
-    // addUser?
-    createUser: async (parent, args) => {
+    addUser: async (parent, args) => {
       const user = await User.create(args);
       // if (!user) {
       //   throw new AuthenticationError("Something is Wrong!");
@@ -67,8 +66,7 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
 
-    // Remove book?
-    deleteBook: async (parent, { user, params }) => {
+    removeBook: async (parent, { bookId }, context) => {
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
